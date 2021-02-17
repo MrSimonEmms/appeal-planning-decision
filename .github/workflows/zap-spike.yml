@@ -24,4 +24,4 @@ jobs:
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.2.0
         with:
-          target: 'https://localhost:9000'
+          target: 'http://localhost:9000'
