@@ -1,0 +1,27 @@
+name: Zap
+
+on:
+  push:
+    branches:
+      - azp
+
+jobs:
+
+  cypress-ACP:
+    name: "Cypress- ACP mode"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install the world
+        run: make install
+
+      - name: Start the world with ACP integration
+        run: |
+          export SERVER_LIMITED_ROUTING_ENABLED=true
+          docker-compose up -d
+
+      - name: ZAP Scan
+        uses: zaproxy/action-full-scan@v0.2.0
+        with:
+          target: 'https://localhost:9000'
