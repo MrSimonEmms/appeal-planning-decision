@@ -16,12 +16,19 @@ jobs:
       - name: Install the world
         run: make install
 
-      - name: Start the world with ACP integration
+      - name: Start the world
         run: |
-          export SERVER_LIMITED_ROUTING_ENABLED=true
+          export SERVER_LIMITED_ROUTING_ENABLED=false
           docker-compose up -d
 
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.2.0
         with:
           target: 'http://localhost:9000'
+
+      - name: Archive
+        if: ${{ always() }}
+        uses: actions/upload-artifact@main
+        with:
+          name: zap-html
+          path: report_html.html
