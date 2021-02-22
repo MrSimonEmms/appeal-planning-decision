@@ -47,7 +47,7 @@ const SECTIONS = [
     tasks: [
       {
         taskId: 'plansDecision',
-        href: '/placeholder',
+        href: '/plans-decision',
         rule: statusTemp,
       },
       {
