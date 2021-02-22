@@ -50,6 +50,12 @@ app.use(
   '/assets/govuk/all.js',
   express.static(path.join(__dirname, '..', 'node_modules', 'govuk-frontend', 'govuk', 'all.js'))
 );
+app.use(
+  '/assets/moj/all.js',
+  express.static(
+    path.join(__dirname, '..', 'node_modules', '@ministryofjustice', 'frontend', 'moj', 'all.js')
+  )
+);
 app.use(fileUpload(config.fileUpload));
 
 // Routes
