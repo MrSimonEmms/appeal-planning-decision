@@ -47,7 +47,6 @@
               text: "Upload a file",
               classes: 'govuk-label--m'
             },
-            attributes: { multiple: '' },
             errorMessage: errorMessage
           }) }}
 
@@ -59,7 +58,7 @@
 
         {{ mojMultiFileUpload({
           uploadedFiles: {
-            heading: { text: 'Files added' },
+            heading: uploadedFiles and { text: 'Files added' },
             items: uploadedFiles
           },
           uploadHtml: uploadHtml
@@ -97,16 +96,16 @@
 {% block pageScripts %}
 <script src="/assets/moj/all.js"></script>
 <script
-  src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-  integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
   crossorigin="anonymous"></script>
 <script>
 window.MOJFrontend.initAll();
 if (typeof MOJFrontend.MultiFileUpload !== 'undefined') {
   new MOJFrontend.MultiFileUpload({
     container: $('.moj-multi-file-upload'),
-    uploadUrl: '/ajax-upload',
-    deleteUrl: '/ajax-delete'
+    uploadUrl: '/upload',
+    deleteUrl: '/delete'
   });
 }
 </script>
