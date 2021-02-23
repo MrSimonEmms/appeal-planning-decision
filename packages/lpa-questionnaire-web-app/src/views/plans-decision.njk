@@ -10,7 +10,7 @@
 
 {% block beforeContent %}
   {{ govukBackLink({
-    text: "Back",
+    text: 'Back',
     href: backLink,
     attributes: {
       'data-cy': 'back'
@@ -24,12 +24,11 @@
 
 {% block content %}
 
-  {% if errors %}
-    {{ govukErrorSummary({
-      titleText: "There is a problem",
-      errorList: errorSummary
-    }) }}
-  {% endif %}
+  {{ govukErrorSummary({
+    titleText: 'There is a problem',
+    classes: not errors and 'moj-hidden',
+    errorList: errorSummary
+  }) }}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -40,11 +39,11 @@
 
         {% set uploadHtml %}
           {{ govukFileUpload({
-            id: "documents",
-            name: "documents",
+            id: 'documents',
+            name: 'documents',
             classes: 'moj-multi-file-upload__input',
             label: {
-              text: "Upload a file",
+              text: 'Upload a file',
               classes: 'govuk-label--m'
             },
             errorMessage: errorMessage
@@ -58,7 +57,7 @@
 
         {{ mojMultiFileUpload({
           uploadedFiles: {
-            heading: uploadedFiles and { text: 'Files added' },
+            heading: { text: 'Files added' },
             items: uploadedFiles
           },
           uploadHtml: uploadHtml
@@ -75,12 +74,12 @@
         {% endset %}
 
         {{ govukDetails({
-          summaryText: "Accepted file formats",
+          summaryText: 'Accepted file formats',
           html: acceptedFormats
         }) }}
 
         {{ govukButton({
-          text: "Save and continue"
+          text: 'Save and continue'
         }) }}
       </form>
     </div>
@@ -101,11 +100,40 @@
   crossorigin="anonymous"></script>
 <script>
 window.MOJFrontend.initAll();
+
+function getErrorSummaryHtml(error) {
+  var html = '';
+  html += '<li>';
+  html += '  <a href="' + error.href + '">' + error.text + '</a>';
+  html += '</li>'
+
+  return html;
+}
+
+function checkErrors(context, response) {
+  const errors = $('.moj-multi-file-upload__list').find('.moj-multi-file-upload__error');
+
+  if(!errors.length) {
+    $('.govuk-error-summary__list').html('');
+    $('.govuk-error-summary').addClass('moj-hidden');
+  }
+}
+
+function showErrorSummary(context, file, response) {
+  if (!response.error || !response.error.summary) return;
+
+  $('.govuk-error-summary__list').append(getErrorSummaryHtml(response.error.summary[0]));
+
+  $('.govuk-error-summary').removeClass('moj-hidden');
+}
+
 if (typeof MOJFrontend.MultiFileUpload !== 'undefined') {
   new MOJFrontend.MultiFileUpload({
     container: $('.moj-multi-file-upload'),
     uploadUrl: '/upload',
-    deleteUrl: '/delete'
+    deleteUrl: '/delete',
+    uploadFileExitHook: showErrorSummary,
+    fileDeleteHook: checkErrors,
   });
 }
 </script>

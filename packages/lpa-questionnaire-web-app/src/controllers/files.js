@@ -1,6 +1,3 @@
-const logger = require('../lib/logger');
-const { createDocument } = require('../lib/documents-api-wrapper');
-
 exports.uploadFile = async (req, res) => {
   const { body } = req;
   const { errors = {}, errorSummary = [], files = {} } = body;
@@ -10,7 +7,11 @@ exports.uploadFile = async (req, res) => {
     return;
   }
 
-  logger.debug(errors);
+  // TODO: need validation here to manage duplicate items
+
+  req.session.uploadedFiles.push(files);
+
+  const { name: fileName } = files;
 
   if (Object.keys(errors).length > 0) {
     res.json({
@@ -19,28 +20,49 @@ exports.uploadFile = async (req, res) => {
         summary: errorSummary,
       },
       file: {
-        filename: files.name,
-        originalname: files.name,
+        filename: fileName,
+        originalname: fileName,
       },
     });
     return;
   }
 
-  const document = await createDocument(req.session.appealReply, files);
-
   res.status(200).json({
     success: {
-      messageText: document.name,
-      messageHtml: document.name,
+      messageText: fileName,
+      messageHtml: fileName,
     },
     file: {
-      filename: document.name,
-      originalname: document.name,
+      filename: fileName,
+      originalname: fileName,
     },
   });
 };
 
 exports.deleteFile = (req, res) => {
+  if (!req.session) {
+    res.status(500).send('No session data found');
+    return;
+  }
+
+  const { body } = req;
+
+  if (!body.delete) {
+    res.status(400).send('Delete required');
+    return;
+  }
+
+  const file = req.session.uploadedFiles.find((upload) => upload.name === body.delete);
+
+  if (!file) {
+    res.status(404).send('File not found');
+    return;
+  }
+
+  req.session.uploadedFiles = req.session.uploadedFiles.filter(
+    (upload) => upload.name !== body.delete
+  );
+
   res.status(200).json({
     success: {
       messageText: `${req.body.delete} deleted`,

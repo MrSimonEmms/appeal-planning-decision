@@ -1,3 +1,4 @@
+const { VIEW } = require('../lib/views');
 const TASK_STATUS = require('./task-status/task-statuses');
 const otherAppealsCompletion = require('./task-status/other-appeals');
 
@@ -17,17 +18,17 @@ const SECTIONS = [
     tasks: [
       {
         taskId: 'submissionAccuracy',
-        href: '/placeholder',
+        href: `/${VIEW.PLACEHOLDER}`,
         rule: statusTemp,
       },
       {
         taskId: 'extraConditions',
-        href: '/placeholder',
+        href: `/${VIEW.PLACEHOLDER}`,
         rule: statusTemp,
       },
       {
         taskId: 'otherAppeals',
-        href: '/other-appeals',
+        href: `/${VIEW.OTHER_APPEALS}`,
         rule: otherAppealsCompletion,
       },
     ],
@@ -37,7 +38,7 @@ const SECTIONS = [
     tasks: [
       {
         taskId: 'aboutSite',
-        href: '/placeholder',
+        href: `/${VIEW.PLACEHOLDER}`,
         rule: statusTemp,
       },
     ],
@@ -47,12 +48,12 @@ const SECTIONS = [
     tasks: [
       {
         taskId: 'plansDecision',
-        href: '/plans-decision',
+        href: `/${VIEW.PLANS_DECISION}`,
         rule: statusTemp,
       },
       {
         taskId: 'officersReport',
-        href: '/placeholder',
+        href: `/${VIEW.PLACEHOLDER}`,
         rule: statusTemp,
       },
     ],
@@ -62,47 +63,47 @@ const SECTIONS = [
     tasks: [
       {
         taskId: 'interestedPartiesApplication',
-        href: '/placeholder',
+        href: `/${VIEW.PLACEHOLDER}`,
         rule: statusTemp,
       },
       {
         taskId: 'representationsInterestedParties',
-        href: '/placeholder',
+        href: `/${VIEW.PLACEHOLDER}`,
         rule: statusTemp,
       },
       {
         taskId: 'interestedPartiesAppeal',
-        href: '/placeholder',
+        href: `/${VIEW.PLACEHOLDER}`,
         rule: statusTemp,
       },
       {
         taskId: 'siteNotices',
-        href: '/placeholder',
+        href: `/${VIEW.PLACEHOLDER}`,
         rule: statusTemp,
       },
       {
         taskId: 'planningHistory',
-        href: '/placeholder',
+        href: `/${VIEW.PLACEHOLDER}`,
         rule: statusTemp,
       },
       {
         taskId: 'statutoryDevelopment',
-        href: '/placeholder',
+        href: `/${VIEW.PLACEHOLDER}`,
         rule: statusTemp,
       },
       {
         taskId: 'otherPolicies',
-        href: '/placeholder',
+        href: `/${VIEW.PLACEHOLDER}`,
         rule: statusTemp,
       },
       {
         taskId: 'supplementaryPlanningDocuments',
-        href: '/placeholder',
+        href: `/${VIEW.PLACEHOLDER}`,
         rule: statusTemp,
       },
       {
         taskId: 'developmentOrNeighbourhood',
-        href: '/placeholder',
+        href: `/${VIEW.PLACEHOLDER}`,
         rule: statusTemp,
       },
     ],
