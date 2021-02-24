@@ -16,6 +16,12 @@ const appealSiteAddressToArray = require('./lib/appeal-site-address-to-array');
 const fileSizeDisplayHelper = require('./lib/file-size-display-helper');
 const filterByKey = require('./lib/filter-by-key');
 const addKeyValuePair = require('./lib/add-key-value-pair');
+<<<<<<< HEAD
+=======
+const initialCookiesMiddleware = require('./middleware/initial-cookies');
+const resLocalsAsNunjucksGlobalEnvVarMiddleware = require('./middleware/res-locals-as-nunjucks-global-env-var');
+const cookieBannerSubmission = require('./middleware/cookie-banner-submission');
+>>>>>>> fe27c237... feat(forms-web-app): cookie consent bar
 require('express-async-errors');
 
 const config = require('./config');
@@ -81,6 +87,12 @@ app.use(
   express.static(path.join(__dirname, '..', 'node_modules', 'govuk-frontend', 'govuk', 'all.js'))
 );
 app.use(fileUpload(config.fileUpload));
+<<<<<<< HEAD
+=======
+app.use(initialCookiesMiddleware);
+app.use(cookieBannerSubmission);
+app.use(resLocalsAsNunjucksGlobalEnvVarMiddleware(env));
+>>>>>>> fe27c237... feat(forms-web-app): cookie consent bar
 
 // Routes
 app.use('/', routes);
