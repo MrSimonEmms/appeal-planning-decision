@@ -1,6 +1,10 @@
 const VIEW = {
   APPLICATION_NUMBER: 'application-number',
 
+  HELP: {
+    COOKIES: 'help/cookies',
+  },
+
   ELIGIBILITY: {
     LISTED_BUILDING: 'eligibility/listed-building',
     LISTED_OUT: 'eligibility/listed-out',
