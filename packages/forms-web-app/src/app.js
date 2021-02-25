@@ -17,11 +17,14 @@ const fileSizeDisplayHelper = require('./lib/file-size-display-helper');
 const filterByKey = require('./lib/filter-by-key');
 const addKeyValuePair = require('./lib/add-key-value-pair');
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 const initialCookiesMiddleware = require('./middleware/initial-cookies');
 const resLocalsAsNunjucksGlobalEnvVarMiddleware = require('./middleware/res-locals-as-nunjucks-global-env-var');
 const cookieBannerSubmission = require('./middleware/cookie-banner-submission');
 >>>>>>> fe27c237... feat(forms-web-app): cookie consent bar
+=======
+>>>>>>> 0ded9f8a... feat(forms-web-app): cookie consent banner - no JS
 require('express-async-errors');
 
 const config = require('./config');
@@ -88,11 +91,14 @@ app.use(
 );
 app.use(fileUpload(config.fileUpload));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 app.use(initialCookiesMiddleware);
 app.use(cookieBannerSubmission);
 app.use(resLocalsAsNunjucksGlobalEnvVarMiddleware(env));
 >>>>>>> fe27c237... feat(forms-web-app): cookie consent bar
+=======
+>>>>>>> 0ded9f8a... feat(forms-web-app): cookie consent banner - no JS
 
 // Routes
 app.use('/', routes);
