@@ -53,11 +53,19 @@
         <li>c) The development hereby permitted shall be carried out in accordance with the approved plans.</li>
       </ol>
       {% endset %}
-      
+
       {% set extraConditionsTextArea %}
         {{ govukTextarea({
           hint: {
-            text: "Copy and paste the list of conditions."
+            text: "Tell us about the extra conditions"
+          },
+          idPrefix: "extra-conditions-text",
+          name: "extra-conditions-text",
+          errorMessage: errors['extra-conditions-text'] and {
+              text: errors['extra-conditions-text'].msg,
+              attributes: {
+                'data-cy': 'extra-conditions-text-error'
+              }
           }
         }) }}
       {% endset %}
